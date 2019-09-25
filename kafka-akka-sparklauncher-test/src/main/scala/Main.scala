@@ -28,7 +28,7 @@ object Main {
     val simulate = system.actorOf(Props(new Simulate(kafkaProducer)), "simulator")
     val sparkLauncher = system.actorOf(Props[SparkLaunch], "sparkLauncher")
     val starter = system.actorOf(Props(new Starter(sparkLauncher)), "starter")
-    simulate ! StartSimulator(20, topic, epdConfig)	// start simulator
+    simulate ! StartSimulator(25, topic, epdConfig)	// start simulator
     starter ! StartMessage				// start sparklauncher
   }
 }

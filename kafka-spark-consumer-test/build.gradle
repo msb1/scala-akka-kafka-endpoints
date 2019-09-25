@@ -23,11 +23,14 @@ dependencies{
 
     // mongodb reactive streams
     compile group: 'org.mongodb.scala', name: 'mongo-scala-driver_2.12', version: '2.7.0'
+    // compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.11.0'
+
 
     // spark dependencies
     compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.4'
     compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.4'
     compile group: 'org.apache.spark', name: 'spark-sql-kafka-0-10_2.12', version: '2.4.4'
+    compile group: 'org.mongodb.spark', name: 'mongo-spark-connector_2.12', version: '2.4.1'
 
     // compile group: 'org.apache.spark', name: 'spark-streaming_2.12', version: '2.4.4'
     // runtime group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '2.4.4'
