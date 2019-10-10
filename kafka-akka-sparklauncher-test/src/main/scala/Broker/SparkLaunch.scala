@@ -12,11 +12,12 @@ class SparkLaunch extends Actor {
     case Launch() => {
       val launcher = new SparkLauncher()
         .setSparkHome("/opt/spark")
-        .setConf("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.12:2.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:2.4.4")
+        // .setConf("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.12:2.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:2.4.4")
+        .setConf("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:2.4.4")
         .setAppResource("/home/barnwaldo/scala/Misc/KafkaSparkTest/build/libs/KafkaSparkTest.jar")
         .setMainClass("Main")
-        .setMaster("local[*]")
-        .setVerbose(true)
+        .setMaster("local[4]")
+        .setVerbose(false)
         .redirectToLog("console")
 
       val listener = new SparkAppHandle.Listener {

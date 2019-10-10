@@ -14,6 +14,8 @@ object Main {
     LoggerFactory.getLogger("org").asInstanceOf[Logger].setLevel(Level.WARN)
     LoggerFactory.getLogger("akka").asInstanceOf[Logger].setLevel(Level.WARN)
     LoggerFactory.getLogger("kafka").asInstanceOf[Logger].setLevel(Level.WARN)
+    // Suppress nasty SparkLauncher log entry header
+    System.setProperty("java.util.logging.SimpleFormatter.format","%5$s%6$s%n")
 
     val topic = "epd01"
     val filePath = "/home/barnwaldo/scala/Misc/kafkaTest/"
@@ -28,7 +30,7 @@ object Main {
     val simulate = system.actorOf(Props(new Simulate(kafkaProducer)), "simulator")
     val sparkLauncher = system.actorOf(Props[SparkLaunch], "sparkLauncher")
     val starter = system.actorOf(Props(new Starter(sparkLauncher)), "starter")
-    simulate ! StartSimulator(25, topic, epdConfig)	// start simulator
+    simulate ! StartSimulator(2000, topic, epdConfig)	// start simulator
     starter ! StartMessage				// start sparklauncher
   }
 }

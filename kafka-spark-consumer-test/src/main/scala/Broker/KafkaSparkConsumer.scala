@@ -12,7 +12,7 @@ object KafkaSparkConsumer {
 
   // write records to MongoDB after every mongoBatch messages are consumed
   val mongoBatch = 10
-  val writeConfig: WriteConfig = WriteConfig(Map("uri" -> "mongodb://xxxx:yyyy@192.168.21.5:27017/", "database" -> "zzzz", "collection" -> "epd01"))
+  val writeConfig: WriteConfig = WriteConfig(Map("uri" -> "mongodb://barnwaldo:shakeydog@192.168.21.5:27017/", "database" -> "barnwaldo", "collection" -> "epd01"))
 
   def runSparkConsumer(topic: String): Unit = {
     // create or get SparkSession
@@ -61,7 +61,7 @@ object KafkaSparkConsumer {
 
       override def close(errorOrNull: Throwable)= {
         // save all records to MongoDB (not previously saved)
-        if (epdRecords.nonEmpty) {
+        if (epdRecords.length > 0) {
           mongoConnector.withCollectionDo(writeConfig, { collection: MongoCollection[Document] =>
             collection.insertMany(epdRecords.map(record => {
               Document.parse(record.value)
